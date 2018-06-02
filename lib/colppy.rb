@@ -1,14 +1,24 @@
-# frozen_string_literal: true
+require 'dry-configurable'
 
-require 'colppy/version'
-require 'colppy/configuration'
-require 'colppy/client'
+require_relative 'colppy/version'
+require_relative 'colppy/client'
 
-module Colppy
-  class << self
-    def log(level, message)
-      return unless Colppy::Configuration.config.log
-      Colppy::Configuration.config.logger.send(level, message)
-    end
+class Colppy
+  include Version
+  extend Dry::Configurable
+
+  setting :user_email
+  setting :user_password
+  setting :dev_user_email
+  setting :dev_user_password
+  setting :company_id
+
+  setting :service_url
+  setting :log, false
+  setting :logger, Logger.new(STDOUT)
+
+  def self.log(level, message)
+    return unless Colppy.config.log
+    Colppy.config.logger.send(level, message)
   end
 end
