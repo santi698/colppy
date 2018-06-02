@@ -4,7 +4,6 @@ require_relative 'colppy/version'
 require_relative 'colppy/client'
 
 class Colppy
-  include Version
   extend Dry::Configurable
 
   setting :user_email
