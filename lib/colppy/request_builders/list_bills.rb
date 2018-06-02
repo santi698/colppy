@@ -11,7 +11,7 @@ class Colppy
           parameters: {
             limit: offset + limit,
             start: offset,
-            filter: Types::Strict::Array.of(Filter)[filter],
+            filter: Types::Strict::Array.of(Types::Filter)[filter],
             idEmpresa: company_id
           }
         }
